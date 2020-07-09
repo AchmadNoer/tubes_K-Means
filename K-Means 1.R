@@ -8,8 +8,8 @@ set.seed(62)
 hasilKMeans <- kmeans(dataIkan.ciri, 7)
 
 par(mfrow=c(1,2))
-plot(dataIkan.ciri, col = hasilKMeans$cluster, main="K-Means")
-plot(dataIkan.ciri, col = dataIkan.jenis, main="Original")
+plot(dataIkan.ciri, col = hasilKMeans$cluster, pch=16, main="K-Means")
+plot(dataIkan.ciri, col = dataIkan.jenis, pch=16, main="Original")
 
 hasilKMeans$tot.withinss
 
@@ -20,5 +20,5 @@ library("ggplot2")
 ggplot() + 
   geom_point(data = dataIkan.ciri, aes(x = Height, y = Width, color = cluster)) + 
   geom_point(data = centers, aes(x = Height, y = Width, color = "Center"), 
-             size = 30, alpha = 0.2, show.legend = FALSE)
+             size = 50, alpha = 0.2, show.legend = FALSE)
   
