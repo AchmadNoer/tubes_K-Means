@@ -1,6 +1,6 @@
 ---
 title: "Tugas Besar Pembelajaran Mesin - K-Means"
-author: "Dibuat oleh 17523001 dan 17523126"
+author: "Dibuat oleh Aziz (17523001) dan Ihya (17523126)"
 output:
   html_document:
     df_print: paged
@@ -8,7 +8,7 @@ output:
   pdf_document: default
 ---
 </br>
-Pada tugas ini kami akan menyelesaikan masalah clustering menggunakan metode k-means pada dataset ikan. Akan dibahas juga mengenai perbandingan antara data asli dengan hasil k-means melalui sebuah plot dan juga temuan-temuan lainnya. Ditampilkan juga kode beserta outputnya. Untuk yang ingin melihat kodenya secara utuh bisa cek di [Github](https://github.com/AgentFighter/tubes_K-Means) berikut.
+Pada tugas ini kami akan menyelesaikan masalah clustering menggunakan metode k-means pada dataset ikan. Akan dibahas juga mengenai perbandingan antara data asli dengan hasil k-means melalui sebuah plot dan juga temuan-temuan lainnya. Ditampilkan juga kode beserta outputnya. Untuk yang ingin melihat kodenya secara utuh bisa cek di [Github](https://github.com/AchmadNoer/tubes_K-Means) berikut.
 
 </br>
 

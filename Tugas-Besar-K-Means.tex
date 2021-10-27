@@ -1,0 +1,228 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Tugas Besar Pembelajaran Mesin - K-Means},
+  pdfauthor={Dibuat oleh Aziz (17523001) dan Ihya (17523126)},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Tugas Besar Pembelajaran Mesin - K-Means}
+\author{Dibuat oleh Aziz (17523001) dan Ihya (17523126)}
+\date{}
+
+\begin{document}
+\maketitle
+
+Pada tugas ini kami akan menyelesaikan masalah clustering menggunakan
+metode k-means pada dataset ikan. Akan dibahas juga mengenai
+perbandingan antara data asli dengan hasil k-means melalui sebuah plot
+dan juga temuan-temuan lainnya. Ditampilkan juga kode beserta outputnya.
+Untuk yang ingin melihat kodenya secara utuh bisa cek di
+\href{https://github.com/AchmadNoer/tubes_K-Means}{Github} berikut.
+
+\hypertarget{data}{%
+\paragraph{Data}\label{data}}
+
+Data yang digunakan dalam kasus clustering ini adalah dataset ikan yang
+didapatkan dari situs \href{https://www.kaggle.com/datasets}{kaggle.com}
+dengan kata kunci
+\href{https://www.kaggle.com/aungpyaeap/fish-market}{Fish Market}
+berformat csv. Di dalamnya terdapat kolom spesies ikan dan berbagai
+macam ukuran dalam satuan centimeter. Untuk memuatnya ke dalam RStudio
+dapat menggunakan kode \texttt{read.csv()} seperti pada baris ke-1.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{dataIkan <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"Ikan.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{fileEncoding=}\StringTok{"UTF-8-BOM"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(dataIkan)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   Species Weight Length1 Length2 Length3  Height  Width
+## 1   Bream    242    23.2    25.4    30.0 11.5200 4.0200
+## 2   Bream    290    24.0    26.3    31.2 12.4800 4.3056
+## 3   Bream    340    23.9    26.5    31.1 12.3778 4.6961
+## 4   Bream    363    26.3    29.0    33.5 12.7300 4.4555
+## 5   Bream    430    26.5    29.0    34.0 12.4440 5.1340
+## 6   Bream    450    26.8    29.7    34.7 13.6024 4.9274
+\end{verbatim}
+
+Dari dataset ikan yang digunakan untuk clustering sebagai variabelnya
+akan dipilih 2 saja yaitu data \texttt{Width} dan \texttt{Height}.
+Pemilihan parameter ini setelah didiskusikan, dirasa cukup sebagai
+parameter yang mewakili dari masing-masing spesies ikan.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{dataIkan.ciri <-}\StringTok{ }\NormalTok{dataIkan[, }\DecValTok{6}\OperatorTok{:}\DecValTok{7}\NormalTok{]}
+\NormalTok{dataIkan.jenis <-}\StringTok{ }\NormalTok{dataIkan[, }\StringTok{"Species"}\NormalTok{]}
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{62}\NormalTok{)}
+\NormalTok{hasilKMeans <-}\StringTok{ }\KeywordTok{kmeans}\NormalTok{(dataIkan.ciri, }\DecValTok{7}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Pada baris ke-4, telah ditentukan bahwa dari fungsi \texttt{kmeans} akan
+mencari 7 cluster dari dataset ikan dengan 2 variabel yang sudah
+ditentukan tadi. Tujuh disini maksudnya adalah 7 spesies ikan karena
+sesuai dengan jumlah spesies ikan di dataset. Selanjutnya, hasil
+clustering dari fungsi \texttt{kmeans} akan divisualisasikan sehingga
+dapat dibandingkan dengan data aslinya.
+
+Sebelum masuk ke plotting, ada tahap yang berfungsi untuk mengevaluasi
+cost function atau yang disebut sebagai distortion function. Di sini
+nilai distortion pada iterasi terakhir dapat dilihat melalui
+\texttt{tot.withinss}.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{hasilKMeans}\OperatorTok{$}\NormalTok{tot.withinss}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 145.1151
+\end{verbatim}
+
+\hypertarget{visualisasi-data}{%
+\paragraph{Visualisasi Data}\label{visualisasi-data}}
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\KeywordTok{par}\NormalTok{(}\DataTypeTok{mfrow=}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{))}
+\KeywordTok{plot}\NormalTok{(dataIkan.ciri, }\DataTypeTok{col =}\NormalTok{ hasilKMeans}\OperatorTok{$}\NormalTok{cluster, }\DataTypeTok{main=}\StringTok{"K-Means"}\NormalTok{)}
+\KeywordTok{plot}\NormalTok{(dataIkan.ciri, }\DataTypeTok{col =}\NormalTok{ dataIkan.jenis, }\DataTypeTok{main=}\StringTok{"Original"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Besar-K-Means_files/figure-latex/unnamed-chunk-4-1.pdf}
+
+Plot sebelah kiri adalah hasil clustering menggunakan fungsi
+\texttt{kmeans}, sedangkan plot sebelah kanan adalah plot dataset
+spesies ikan berdasarkan dua variabel yaitu \texttt{Height} dan
+\texttt{Width}.
+
+Perhatikan dua plot diatas, dapat dilihat bahwa hasil clustering
+merepresentasikan kelompok spesies dengan cukup bagus apabila
+dibandingkan dengan plot dari data aslinya. Tujuh spesies
+direpresentasikan dengan warna yang berbeda-beda. Walaupun urutan warna
+yang tidak sama pada hasil clustering (plot kiri) dengan data aslinya
+(plot kanan), hal tersebut tidak menjadi masalah.
+
+Di bawah ini, kita akan memvisualisasikan hasil clustering di atas,
+menggunakan package \texttt{ggplot2}.
+
+Baris ke-4 hingga ke-6 adalah plotting menggunakan \texttt{ggplot2}.
+Pada bagian ini akan diberikan efek radius atau jangkauan untuk
+masing-masing clusternya.
+
+\begin{Shaded}
+\begin{Highlighting}[numbers=left,,]
+\NormalTok{dataIkan.ciri}\OperatorTok{$}\NormalTok{cluster <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(hasilKMeans}\OperatorTok{$}\NormalTok{cluster)}
+\NormalTok{centers <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(hasilKMeans}\OperatorTok{$}\NormalTok{centers)}
+
+\KeywordTok{library}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\KeywordTok{ggplot}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ dataIkan.ciri, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Height, }\DataTypeTok{y =}\NormalTok{ Width, }\DataTypeTok{color =}\NormalTok{ cluster)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_point}\NormalTok{(}\DataTypeTok{data =}\NormalTok{ centers, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Height, }\DataTypeTok{y =}\NormalTok{ Width, }\DataTypeTok{color =} \StringTok{"Center"}\NormalTok{), }
+             \DataTypeTok{size =} \DecValTok{30}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.2}\NormalTok{, }\DataTypeTok{show.legend =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Tugas-Besar-K-Means_files/figure-latex/unnamed-chunk-5-1.pdf}
+
+\end{document}
