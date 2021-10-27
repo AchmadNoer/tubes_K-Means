@@ -34,7 +34,7 @@ par(mfrow=c(1,2))
 plot(dataIkan.ciri, col = hasilKMeans$cluster, main="K-Means")
 plot(dataIkan.ciri, col = dataIkan.jenis, main="Original")
 ```
-![Compare plot](./K-Means vs Original plot.png)
+![Compare plot](https://github.com/AchmadNoer/tubes_K-Means/blob/master/K-Means%20vs%20Original%20plot.png)
 
 Plot sebelah kiri adalah hasil clustering menggunakan fungsi `kmeans`, sedangkan plot sebelah kanan adalah plot dataset spesies ikan berdasarkan dua variabel yaitu `Height` dan `Width`. 
 
@@ -54,4 +54,4 @@ ggplot() +
   geom_point(data = centers, aes(x = Height, y = Width, color = "Center"), 
              size = 30, alpha = 0.2, show.legend = FALSE)
 ```
-![Result plot](./K-Means Result plot.png)
+![Result plot](https://github.com/AchmadNoer/tubes_K-Means/blob/master/K-Means%20Result%20plot.png)
